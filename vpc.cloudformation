@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: "AWS CloudFormation script to create a basic VPC setup"
+
+#Parameters:
+
+Resources:
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.0.0/16"
+      Tags: 
+        - Key: Name
+          Value: DM_VPC
+        - Key: Application
+          Value: DEADMOUSE
+
+  SubnetDEVNAT01a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.1.0/24"
+      Tags:
+        - Key: Name
+          Value: DEVNAT01a
+        - Key: Application
+          Value: DEADMOUSE
+
+
+
+
+ 
+
