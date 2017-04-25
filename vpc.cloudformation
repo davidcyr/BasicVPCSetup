@@ -16,6 +16,7 @@ Resources:
         - Key: Application
           Value: DEADMOUSE
 
+  #TODO AZ association
   SubnetDEVNAT01a:
     Type: AWS::EC2::Subnet
     Properties:
@@ -25,6 +26,32 @@ Resources:
       Tags:
         - Key: Name
           Value: DEVNAT01a
+        - Key: Application
+          Value: DEADMOUSE
+
+  #TODO AZ association
+  SubnetDEVWS01a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.11.0/24"
+      Tags:
+        - Key: Name
+          Value: DEVWS01a
+        - Key: Application
+          Value: DEADMOUSE
+
+  #TODO AZ association
+  SubnetDEVWS01b:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.12.0/24"
+      Tags:
+        - Key: Name
+          Value: DEVWS01b
         - Key: Application
           Value: DEADMOUSE
 
@@ -85,6 +112,22 @@ Resources:
         Ref: SubnetDEVNAT01a
       RouteTableId: 
         Ref: PublicRouteTable
+
+  SubnetDEVWS01aRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVWS01a
+      RouteTableId: 
+        Ref: PrivateRouteTable
+
+  SubnetDEVWS01bRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVWS01b
+      RouteTableId: 
+        Ref: PrivateRouteTable
 
 
 
