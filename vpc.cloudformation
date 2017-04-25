@@ -46,6 +46,52 @@ Resources:
       InternetGatewayId:
         Ref: InternetGateway
 
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: DM_PVT_ROUTE
+        - Key: Application
+          Value: DEADMOUSE
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: DM_PUB_ROUTE
+        - Key: Application
+          Value: DEADMOUSE
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: 
+        Ref: PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: 
+        Ref: InternetGateway
+
+  SubnetDEVNAT01aRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVNAT01a
+      RouteTableId: 
+        Ref: PublicRouteTable
+
+
+
+
+
+
+
 
 
 
