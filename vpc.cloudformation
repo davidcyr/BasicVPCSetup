@@ -80,6 +80,33 @@ Resources:
         - Key: Application
           Value: DEADMOUSE
 
+  SubnetDEVDB01a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.14.0/24"
+      AvailabilityZone:
+        Ref: AZa
+      Tags:
+        - Key: Name
+          Value: DEVDB01a
+        - Key: Application
+          Value: DEADMOUSE
+
+  SubnetDEVDB01b:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.15.0/24"
+      AvailabilityZone:
+        Ref: AZb
+      Tags:
+        - Key: Name
+          Value: DEVDB01b
+        - Key: Application
+          Value: DEADMOUSE
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -168,6 +195,21 @@ Resources:
       RouteTableId: 
         Ref: PrivateRouteTable
 
+  SubnetDEVDB01aRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVDB01a
+      RouteTableId: 
+        Ref: PrivateRouteTable
+
+  SubnetDEVDB01bRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVDB01b
+      RouteTableId: 
+        Ref: PrivateRouteTable
 
   ###############################################
   #TODO  Security Group setups?
