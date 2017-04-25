@@ -2,7 +2,15 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Description: "AWS CloudFormation script to create a basic VPC setup"
 
-#Parameters:
+Parameters:
+
+  AZa:
+    Type: String
+    Default: us-west-2a
+
+  AZb:
+    Type: String
+    Default: us-west-2b
 
 Resources:
 
@@ -16,39 +24,42 @@ Resources:
         - Key: Application
           Value: DEADMOUSE
 
-  #TODO AZ association
   SubnetDEVNAT01a:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: 
         Ref: VPC
       CidrBlock: "192.168.1.0/24"
+      AvailabilityZone:
+        Ref: AZa
       Tags:
         - Key: Name
           Value: DEVNAT01a
         - Key: Application
           Value: DEADMOUSE
 
-  #TODO AZ association
   SubnetDEVWS01a:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: 
         Ref: VPC
       CidrBlock: "192.168.11.0/24"
+      AvailabilityZone:
+        Ref: AZa
       Tags:
         - Key: Name
           Value: DEVWS01a
         - Key: Application
           Value: DEADMOUSE
 
-  #TODO AZ association
   SubnetDEVWS01b:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: 
         Ref: VPC
       CidrBlock: "192.168.12.0/24"
+      AvailabilityZone:
+        Ref: AZb
       Tags:
         - Key: Name
           Value: DEVWS01b
@@ -129,7 +140,7 @@ Resources:
       RouteTableId: 
         Ref: PrivateRouteTable
 
-
+  #TODO  Security Group setups?
 
 
 
