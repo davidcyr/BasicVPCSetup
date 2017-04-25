@@ -12,6 +12,10 @@ Parameters:
     Type: String
     Default: us-west-2b
 
+  AppName: 
+    Type: String
+    Default: DEADMOUSE
+
 Resources:
 
   VPC:
@@ -22,7 +26,8 @@ Resources:
         - Key: Name
           Value: DM_VPC
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVNAT01a:
     Type: AWS::EC2::Subnet
@@ -36,7 +41,8 @@ Resources:
         - Key: Name
           Value: DEVNAT01a
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVNAT01b:
     Type: AWS::EC2::Subnet
@@ -50,7 +56,8 @@ Resources:
         - Key: Name
           Value: DEVNAT01b
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVWS01a:
     Type: AWS::EC2::Subnet
@@ -64,7 +71,8 @@ Resources:
         - Key: Name
           Value: DEVWS01a
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVWS01b:
     Type: AWS::EC2::Subnet
@@ -78,7 +86,8 @@ Resources:
         - Key: Name
           Value: DEVWS01b
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVDB01a:
     Type: AWS::EC2::Subnet
@@ -92,7 +101,8 @@ Resources:
         - Key: Name
           Value: DEVDB01a
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   SubnetDEVDB01b:
     Type: AWS::EC2::Subnet
@@ -106,7 +116,8 @@ Resources:
         - Key: Name
           Value: DEVDB01b
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -115,7 +126,8 @@ Resources:
         - Key: Name
           Value: DM_IGW
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -140,7 +152,8 @@ Resources:
         - Key: Name
           Value: DM_PVT_ROUTE
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -151,7 +164,8 @@ Resources:
         - Key: Name
           Value: DM_PUB_ROUTE
         - Key: Application
-          Value: DEADMOUSE
+          Value: 
+            Ref: AppName
 
   PublicRoute:
     Type: AWS::EC2::Route
