@@ -29,6 +29,24 @@ Resources:
           Value: DEADMOUSE
 
 
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: DM_IGW
+        - Key: Application
+          Value: DEADMOUSE
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: 
+      VpcId:
+        Ref: VPC
+      InternetGatewayId:
+        Ref: InternetGateway
+
+
 
 
  
