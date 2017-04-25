@@ -38,6 +38,20 @@ Resources:
         - Key: Application
           Value: DEADMOUSE
 
+  SubnetDEVNAT01b:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.2.0/24"
+      AvailabilityZone:
+        Ref: AZb
+      Tags:
+        - Key: Name
+          Value: DEVNAT01b
+        - Key: Application
+          Value: DEADMOUSE
+
   SubnetDEVWS01a:
     Type: AWS::EC2::Subnet
     Properties:
@@ -84,6 +98,12 @@ Resources:
       InternetGatewayId:
         Ref: InternetGateway
 
+  ###############################################
+  #TODO Add EIP for NAT Service
+  #TODO Add NAT Service
+  #TODO Update Private Route Table to use NAT
+  ###############################################
+
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -124,6 +144,14 @@ Resources:
       RouteTableId: 
         Ref: PublicRouteTable
 
+  SubnetDEVNAT01bRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetDEVNAT01b
+      RouteTableId: 
+        Ref: PublicRouteTable
+
   SubnetDEVWS01aRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -140,7 +168,10 @@ Resources:
       RouteTableId: 
         Ref: PrivateRouteTable
 
+
+  ###############################################
   #TODO  Security Group setups?
+  ###############################################
 
 
 
