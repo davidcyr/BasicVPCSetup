@@ -13,6 +13,15 @@ Note: in the below, replace the profile name with a profile you have configured 
 * To Tear Down the stack and all its resources, use:
     * aws cloudformation delete-stack --stack-name myteststack --profile myDave
 
+## Templates
+
+* vpc.cloudformation: A basic shell of the VPC structure without a NAT (to spin up for structural testing without NAT charges
+
+
+* vpc.cloudformation.NAT: A VPC structure including a NAT for private subnet routing
+
+
+
 
 
 
