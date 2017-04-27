@@ -18,10 +18,13 @@ Note: in the below, replace the profile name with a profile you have configured 
 * vpc.cloudformation: A basic shell of the VPC structure without a NAT (to spin up for structural testing without NAT charges
 
 * vpc.cloudformation.NAT: A VPC structure including a NAT for private subnet routing
+
 ![NAT](/diagrams/VPC_NAT_template.png)
 
 * vpc.cloudformation.ELB: A VPC structure including public subnets for ELBs (no NAT by default)
+
 ![NAT](/diagrams/VPC_ELB_template.png)
+
 
 
 
