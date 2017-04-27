@@ -19,11 +19,9 @@ Note: in the below, replace the profile name with a profile you have configured 
 
 * vpc.cloudformation.NAT: A VPC structure including a NAT for private subnet routing
 ![NAT](/diagrams/VPC_NAT_template.png)
-Format: ![Alt text](url)
 
 * vpc.cloudformation.ELB: A VPC structure including public subnets for ELBs (no NAT by default)
 ![NAT](/diagrams/VPC_ELB_template.png)
-Format: ![Alt text](url)
 
 
 
