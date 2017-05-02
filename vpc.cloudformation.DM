@@ -44,6 +44,8 @@ Resources:
         - Key: Application
           Value: 
             Ref: AppName
+        - Key: ENV
+          Value: DEV
 
   SubnetDEVDB01b:
     Type: AWS::EC2::Subnet
@@ -59,6 +61,8 @@ Resources:
         - Key: Application
           Value: 
             Ref: AppName
+        - Key: ENV
+          Value: DEV
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -144,6 +148,8 @@ Resources:
         - Key: Application
           Value: 
             Ref: AppName
+        - Key: ENV
+          Value: DEV
       VpcId:
         Ref: VPC
      
@@ -165,10 +171,67 @@ Resources:
         - Key: Application
           Value: 
             Ref: AppName
+        - Key: ENV
+          Value: DEV
       VpcId:
         Ref: VPC
 
 
+  RDSDEVDBSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: "DB Subnet Group for DEV DM."
+      SubnetIds:
+        - Ref: SubnetDEVDB01a
+        - Ref: SubnetDEVDB01b 
+      Tags:
+        - Key: Name
+          Value: RDSDEVDBSubnetGroup
+        - Key: Application
+          Value: 
+            Ref: AppName
+        - Key: ENV
+          Value: DEV
+
+
+
+  RDSDEVDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      #
+      # Resource Definition
+      #
+      AllocatedStorage: '5'
+      DBInstanceClass: db.t2.micro
+      BackupRetentionPeriod: 7
+      Engine: MySQL
+      DBInstanceIdentifier: devdminstance
+      DBName: devdmdb
+      #
+      # Stub Credentials 
+      # will work on shifting to IAM user later
+      #
+      MasterUsername: root
+      MasterUserPassword: putSecretHere
+      #
+      # placement
+      # 
+      PubliclyAccessible: false
+      MultiAZ: true
+      VPCSecurityGroups:
+        - Ref: RDSDMDEVDBSecurityGroup
+      DBSubnetGroupName: 
+        Ref: RDSDEVDBSubnetGroup
+      Tags:
+        - Key: Name
+          Value: RDSDEVDB
+        - Key: Application
+          Value: 
+            Ref: AppName
+        - Key: ENV
+          Value: DEV
+
+    
 
 
 
