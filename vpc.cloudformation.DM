@@ -78,12 +78,6 @@ Resources:
       InternetGatewayId:
         Ref: InternetGateway
 
-  ###############################################
-  #TODO Add EIP for NAT Service
-  #TODO Add NAT Service
-  #TODO Update Private Route Table to use NAT
-  ###############################################
-
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -138,6 +132,41 @@ Resources:
   ###############################################
   #TODO  Security Group setups?
   ###############################################
+
+  RDSDEVClientTrustSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: DEVRDSClientTrustSecurityGroup
+      GroupDescription: "DEV Security Group for clients connecting to RDS."
+      Tags:
+        - Key: Name
+          Value: DEVRDSClientTrustSecurityGroup
+        - Key: Application
+          Value: 
+            Ref: AppName
+      VpcId:
+        Ref: VPC
+     
+
+  RDSDMDEVDBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: DEVDMDBSecurityGroup
+      GroupDescription: "DEV Security Group for DM data."
+      SecurityGroupIngress:
+        - SourceSecurityGroupId: 
+            Ref: RDSDEVClientTrustSecurityGroup
+          IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+      Tags:
+        - Key: Name
+          Value: DEVDMDBSecurityGroup
+        - Key: Application
+          Value: 
+            Ref: AppName
+      VpcId:
+        Ref: VPC
 
 
 
