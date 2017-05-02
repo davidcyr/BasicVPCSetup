@@ -23,7 +23,11 @@ Note: in the below, replace the profile name with a profile you have configured 
 
 * vpc.cloudformation.ELB: A VPC structure including public subnets for ELBs (no NAT by default)
 
-![NAT](/diagrams/VPC_ELB_template.png)
+![ELB](/diagrams/VPC_ELB_template.png)
+
+* vpc.cloudformation.DM: this template is for my own use and probably does not have general public utility
+
+![DM](/diagrams/VPC_DM_template.png)
 
 
 
