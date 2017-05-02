@@ -30,6 +30,22 @@ Resources:
             Ref: AppName
 
 
+  SubnetSANDBOX:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      CidrBlock: "192.168.1.0/24"
+      AvailabilityZone:
+        Ref: AZa
+      Tags:
+        - Key: Name
+          Value: SANDBOX
+        - Key: Application
+          Value: 
+            Ref: AppName
+
+
   SubnetDEVDB01a:
     Type: AWS::EC2::Subnet
     Properties:
@@ -116,6 +132,13 @@ Resources:
       GatewayId: 
         Ref: InternetGateway
 
+  SubnetSANDBOXRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: 
+        Ref: SubnetSANDBOX
+      RouteTableId: 
+        Ref: PublicRouteTable
 
   SubnetDEVDB01aRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
