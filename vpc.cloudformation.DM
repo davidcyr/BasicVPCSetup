@@ -2,19 +2,44 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Description: "AWS CloudFormation script to create a basic VPC setup"
 
+# Usage examples:
+# aws cloudformation create-stack --stack-name deadmouse --template-body file://vpc.cloudformation.DM --profile concordDcyr
+# aws cloudformation update-stack --stack-name deadmouse --template-body file://vpc.cloudformation.DM --profile concordDcyr
+# aws cloudformation delete-stack --stack-name deadmouse --profile concordDcyr
+
 Parameters:
 
   AZa:
     Type: String
-    Default: us-west-2a
+    Default: us-east-1a
 
   AZb:
     Type: String
-    Default: us-west-2b
+    Default: us-east-1b
 
   AppName: 
     Type: String
     Default: DEADMOUSE
+
+  DevDBInstance:
+    Type: String
+    Default: dbinstance
+
+  DevDBDBName:
+    Type: String
+    Default: devdmdb
+
+  DevDBMasterUser:
+    Type: String
+    Default: root
+
+  DevDBMasterPassword:
+    Type: String
+    Default: replaceMe
+
+  DevDBIsMultiZone:
+    Type: String
+    Default: false
 
 Resources:
 
@@ -228,19 +253,24 @@ Resources:
       DBInstanceClass: db.t2.micro
       BackupRetentionPeriod: 7
       Engine: MySQL
-      DBInstanceIdentifier: devdminstance
-      DBName: devdmdb
+      DBInstanceIdentifier: 
+        Ref: DevDBInstance
+      DBName: 
+        Ref: DevDBDBName
       #
       # Stub Credentials 
       # will work on shifting to IAM user later
       #
-      MasterUsername: root
-      MasterUserPassword: putSecretHere
+      MasterUsername: 
+        Ref: DevDBMasterUser
+      MasterUserPassword: 
+        Ref: DevDBMasterPassword
       #
       # placement
       # 
       PubliclyAccessible: false
-      MultiAZ: true
+      MultiAZ: 
+        Ref: DevDBIsMultiZone
       VPCSecurityGroups:
         - Ref: RDSDMDEVDBSecurityGroup
       DBSubnetGroupName: 
