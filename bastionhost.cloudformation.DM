@@ -28,3 +28,11 @@ Resources:
             - !ImportValue DEVSSHAdminAccessSecurityGroup
             - !ImportValue RDSDEVClientTrustSecurityGroup
           SubnetId: !ImportValue SubnetSANDBOX 
+      UserData:
+        Fn::Base64: | 
+          #!/bin/bash
+          yum update -y
+          yum install -y mysql
+          yum install -y git
+
+
